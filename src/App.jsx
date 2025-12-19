@@ -3,7 +3,7 @@ import { useCurrentDate } from "./hooks/useCurrentDate";
 import { HourlyForecastCard } from "./HourlyForecastCard";
 import { WeatherInfoCard } from "./WeatherInfoCard";
 import { useFetchLocation } from "./hooks/useFetchLocation";
-import { useState, useRef, Activity } from "react";
+import { useState, Activity } from "react";
 import { useFetchLonLan } from "./hooks/useFetchLonLan";
 import { useFetchWeatherData } from "./hooks/useFetchWeatherData";
 import { useDailyForecastData } from "./hooks/useDailyForecastData";
@@ -24,6 +24,9 @@ function App() {
   const { currentDate } = useCurrentDate(dataLoading, weatherData);
   const { dailyForecasts } = useDailyForecastData(weatherData);
   const { hourlyForecasts } = useHourlyForecastData(weatherData);
+
+  console.log(city);
+  console.log(country);
 
   return (
     <div

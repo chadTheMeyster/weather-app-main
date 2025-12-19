@@ -7,17 +7,19 @@ export function useFetchLocation(longitude, latitude) {
   const [locationLoading, setLocationLoading] = useState(false);
   const [error, setError] = useState();
 
+  const apiKey = import.meta.env.VITE_REVERSE_GEOLOCATION_API_KEY;
+
   useEffect(() => {
     async function fetchLocationData() {
       setLocationLoading(true);
       try {
         if (latitude !== null && longitude !== null ) {
           const response = await axios.get(
-            `https://api.geonames.org/findNearbyJSON?lat=${latitude}&lng=${longitude}&username=chad04`
+            `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=${apiKey}`
           );
           if (response.data) {
-            setCity(response.data.geonames[0].toponymName);
-            setCountry(response.data.geonames[0].countryName);
+            setCity(response.data.features[0].properties.city);
+            setCountry(response.data.features[0].properties.country);
           }
         }
       } catch (e) {
