@@ -13,7 +13,7 @@ export function useFetchLocation(longitude, latitude) {
       try {
         if (latitude !== null && longitude !== null ) {
           const response = await axios.get(
-            `http://api.geonames.org/findNearbyJSON?lat=${latitude}&lng=${longitude}&username=chad04`
+            `https://api.geonames.org/findNearbyJSON?lat=${latitude}&lng=${longitude}&username=chad04`
           );
           if (response.data) {
             setCity(response.data.geonames[0].toponymName);
