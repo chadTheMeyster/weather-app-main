@@ -26,7 +26,6 @@ function App() {
   const { hourlyForecasts } = useHourlyForecastData(weatherData);
 
   console.log(city);
-  console.log(country);
 
   return (
     <div
