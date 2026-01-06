@@ -13,8 +13,9 @@ export function DailyForecastCard({dailyForecasts}) {
           weatherCode === 61 || weatherCode === 63 || weatherCode === 65 || weatherCode === 66 || weatherCode === 67 || weatherCode === 80 || weatherCode === 81 || weatherCode === 82 ? './images/icon-rain.webp' :
           weatherCode === 71 || weatherCode === 73 || weatherCode === 75 || weatherCode === 77 || weatherCode === 85 || weatherCode === 86 ? './images/icon-snow.webp' :
           weatherCode === 95 || weatherCode === 96 || weatherCode === 99 ? './images/icon-storm.webp' : '-'
-        } alt="weather condition icon"/>
-        <div className="flex justify-between">
+        } alt="weather condition icon"
+        className="mt-8"/>
+        <div className="flex justify-between mt-8">
           <div className="text-Neutral-200">{dailyForecast.maxTemperature +'°'}</div>
           <div className="text-Neutral-300">{dailyForecast.minTemperature +'°'}</div>
         </div>

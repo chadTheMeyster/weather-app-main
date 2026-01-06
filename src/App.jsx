@@ -14,7 +14,8 @@ function App() {
   const [placeName, setPlaceName] = useState("");
   const [search, setSearch] = useState('');
   const [day, setDay] = useState(dayjs().format("ddd"));
-  const [ isUnit, setIsUnit ] = useState(false)
+  const [ isUnit, setIsUnit ] = useState(false);
+  const [ isImperial, setIsImperial ] = useState(false)
   const { longitude, latitude } = useFetchLonLan(search);
   const { locationLoading, error, city, country } = useFetchLocation(
     longitude,
@@ -53,9 +54,16 @@ function App() {
             <div
           className={`absolute bg-Neutral-800 right-0 top-16 p-1.5 rounded-xl w-55`}
         >
-          <div className="p-2 rounded-xl border-2 border-Neutral-700 hover:border-2 hover:border-white hover:bg-Neutral-700">
-            Switch to Imperial
-          </div>
+          <button className="p-2 rounded-xl border-2 w-full text-left border-Neutral-700 hover:border-2 hover:border-white hover:bg-Neutral-700"
+          onClick={ () => {
+            if (isImperial){
+              setIsImperial(false);
+            }else{
+              setIsImperial(true);
+            }
+          }}>
+            Switch to {isImperial ? 'Imperial' : 'Metric'}
+          </button>
 
           <div className="text-Neutral-300 p-1.5">Temperature</div>
           <div className="p-2 rounded-xl bg-Neutral-700 flex justify-between items-center">
@@ -184,7 +192,7 @@ function App() {
 
         <h2 className="text-justify w-full mt-10 text-3xl">Daily forecast</h2>
 
-        <div className="grid grid-cols-3 gap-5 w-full mt-8 md:flex">
+        <div className="grid grid-cols-3 gap-5 w-full mt-8 md:flex md:h-full">
           <DailyForecastCard dailyForecasts={dailyForecasts} />
         </div>
           </div>
@@ -205,14 +213,14 @@ function App() {
             <option value="Mon">Monday</option>
             <option value="Tue">Tuesday</option>
             <option value="Wed">Wednesday</option>
-            <option value="Thur">Thursday</option>
+            <option value="Thu">Thursday</option>
             <option value="Fri">Friday</option>
             <option value="Sat">Saturday</option>
             <option value="Sun">Sunday</option>
           </select>
         </div>
 
-        <div className="h-200 overflow-y-scroll">
+        <div className="h-200 overflow-y-auto">
           <HourlyForecastCard hourlyForecasts={hourlyForecasts} day={day} />
         </div>
       </div>
