@@ -1,4 +1,4 @@
-export function DailyForecastCard({dailyForecasts}) {
+export function DailyForecastCard({dailyForecasts, isImperial}) {
 
   return dailyForecasts.map( (dailyForecast) => {
     const {weatherCode} = dailyForecast;
@@ -16,8 +16,8 @@ export function DailyForecastCard({dailyForecasts}) {
         } alt="weather condition icon"
         className="mt-8"/>
         <div className="flex justify-between mt-8">
-          <div className="text-Neutral-200">{dailyForecast.maxTemperature +'°'}</div>
-          <div className="text-Neutral-300">{dailyForecast.minTemperature +'°'}</div>
+          <div className="text-Neutral-200">{isImperial ? (Math.round((dailyForecast.maxTemperature * 9/5)+32)) + '°' : dailyForecast.maxTemperature + '°'}</div>
+          <div className="text-Neutral-300">{isImperial ? (Math.round((dailyForecast.minTemperature * 9/5)+32)) + '°' : dailyForecast.minTemperature + '°'}</div>
         </div>
       </div>
     )

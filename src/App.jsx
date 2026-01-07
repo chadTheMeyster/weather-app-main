@@ -62,31 +62,38 @@ function App() {
               setIsImperial(true);
             }
           }}>
-            Switch to {isImperial ? 'Imperial' : 'Metric'}
+            Switch to {isImperial ? 'Metric' : 'Imperial'}
           </button>
 
           <div className="text-Neutral-300 p-1.5">Temperature</div>
-          <div className="p-2 rounded-xl bg-Neutral-700 flex justify-between items-center">
+          <div className={isImperial ? 'p-2 rounded-xl hover:bg-Neutral-700' : "p-2 rounded-xl bg-Neutral-700 flex justify-between items-center"}>
             <div>Celsius (°C)</div>
-            <img src="./images/icon-checkmark.svg" alt="checkmark" />
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? 'hidden' : ''}/>
           </div>
-          <div className="p-2 rounded-xl hover:bg-Neutral-700">
-            Fahrenheit (°F)
+          <div className={isImperial ? 'p-2 rounded-xl bg-Neutral-700 flex justify-between items-center' : 'p-2 rounded-xl hover:bg-Neutral-700'}>
+            <div>Fahrenheit (°F)</div>
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? '' : 'hidden'}/>
           </div>
 
           <div className="text-Neutral-300 p-1.5">Wind Speed</div>
-          <div className="p-2 rounded-xl bg-Neutral-700 flex justify-between items-center">
+          <div className={isImperial ? "p-2 rounded-xl hover:bg-Neutral-700" : "p-2 rounded-xl bg-Neutral-700 flex justify-between items-center"}>
             <div>km/h</div>
-            <img src="./images/icon-checkmark.svg" alt="checkmark" />
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? 'hidden' : ''}/>
           </div>
-          <div className="p-2 rounded-xl hover:bg-Neutral-700">mph</div>
+          <div className={isImperial ? "p-2 rounded-xl bg-Neutral-700 flex justify-between items-center" : "p-2 rounded-xl hover:bg-Neutral-700"}>
+            <div>mph</div>
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? '' : 'hidden'}/>
+          </div>
 
           <div className="text-Neutral-300 p-1.5">Precipitation</div>
-          <div className="p-2 rounded-xl bg-Neutral-700 flex justify-between items-center">
+          <div className={isImperial ? "p-2 rounded-xl hover:bg-Neutral-700" : "p-2 rounded-xl bg-Neutral-700 flex justify-between items-center"}>
             <div>Millimeters (mm)</div>
-            <img src="./images/icon-checkmark.svg" alt="checkmark" />
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? 'hidden' : ''}/>
           </div>
-          <div className="p-2 rounded-xl hover:bg-Neutral-700">Inches (in)</div>
+          <div className={isImperial ? "p-2 rounded-xl bg-Neutral-700 flex justify-between items-center" : "p-2 rounded-xl hover:bg-Neutral-700"}>
+            <div>Inches (in)</div>
+            <img src="./images/icon-checkmark.svg" alt="checkmark" className={isImperial ? '' : 'hidden'}/>
+          </div>
         </div>
 
           </Activity>
@@ -179,7 +186,7 @@ function App() {
             <div className="text-bold text-9xl">
               {dataLoading
                 ? ""
-                : Math.round(weatherData?.current?.temperature_2m) + "°"}
+                : isImperial ? Math.round((weatherData?.current?.temperature_2m*9/5)+32) + "°" : Math.round(weatherData?.current?.temperature_2m) + "°" }
             </div>
           </div>
         </div>
@@ -187,13 +194,13 @@ function App() {
 
       <div className="grid grid-cols-2 gap-5 w-full mt-8
       md:grid-rows-subgrid md:grid-cols-4 md:items-center md:m-0 md:mt-10">
-        <WeatherInfoCard weatherData={weatherData} />
+        <WeatherInfoCard weatherData={weatherData} isImperial={isImperial}/>
       </div>
 
         <h2 className="text-justify w-full mt-10 text-3xl">Daily forecast</h2>
 
         <div className="grid grid-cols-3 gap-5 w-full mt-8 md:flex md:h-full">
-          <DailyForecastCard dailyForecasts={dailyForecasts} />
+          <DailyForecastCard dailyForecasts={dailyForecasts} isImperial={isImperial}/>
         </div>
           </div>
       
@@ -221,7 +228,7 @@ function App() {
         </div>
 
         <div className="h-200 overflow-y-auto">
-          <HourlyForecastCard hourlyForecasts={hourlyForecasts} day={day} />
+          <HourlyForecastCard hourlyForecasts={hourlyForecasts} day={day} isImperial={isImperial} />
         </div>
       </div>
         </div>

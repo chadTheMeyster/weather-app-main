@@ -1,10 +1,10 @@
 
-export function WeatherInfoCard({weatherData}) {
+export function WeatherInfoCard({weatherData, isImperial}) {
 
   const weatherCardInfo = [
   {
     attribute: "Feels like",
-    data: Math.round(weatherData?.current?.apparent_temperature)+'°' ?? "-",
+    data: isImperial ? Math.round(((weatherData?.current?.apparent_temperature)*(9/5)) + 32)+'°' : Math.round(weatherData?.current?.apparent_temperature)+'°' ,
     ID:'001'
   },
   {
@@ -14,12 +14,12 @@ export function WeatherInfoCard({weatherData}) {
   },
   {
     attribute: "Wind",
-    data: Math.round(weatherData?.current?.wind_speed_10m) + "mph" ?? '-',
+    data: isImperial ? Math.round(weatherData?.current?.wind_speed_10m * 0.621371) + "mph" : Math.round(weatherData?.current?.wind_speed_10m) + 'kph',
     ID:'003'
   },
   {
     attribute: "Precipitation",
-    data: Math.round(weatherData?.current?.precipitation) + "mm" ?? '-',
+    data: isImperial ? Math.round(weatherData?.current?.precipitation * 0.0393701) + "in" : Math.round(weatherData?.current?.precipitation) + "mm" ,
     ID:'004'
   },
 ];

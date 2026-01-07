@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export function HourlyForecastCard({ hourlyForecasts, day }) {
+export function HourlyForecastCard({ hourlyForecasts, day, isImperial }) {
   return hourlyForecasts.map((hourlyForecast) => {
     if (day === dayjs(hourlyForecast.time).format("ddd")) {
       const weatherCode = hourlyForecast.weatherCode;
@@ -57,7 +57,7 @@ export function HourlyForecastCard({ hourlyForecasts, day }) {
           </div>
 
           <div className="text-2xl">
-            {Math.round(hourlyForecast.temperature) + "°"}
+            {isImperial ? Math.round((hourlyForecast.temperature*9/5)+32) + "°" : Math.round(hourlyForecast.temperature) + "°"}
           </div>
         </div>
       );
