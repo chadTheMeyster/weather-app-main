@@ -8,6 +8,7 @@ import { useFetchLonLan } from "./hooks/useFetchLonLan";
 import { useFetchWeatherData } from "./hooks/useFetchWeatherData";
 import { useDailyForecastData } from "./hooks/useDailyForecastData";
 import { useHourlyForecastData } from "./hooks/useHourlyForecastData";
+import { Skeleton } from "../components/ui/skeleton";
 import dayjs from "dayjs";
 
 function App() {
@@ -148,7 +149,9 @@ function App() {
           {/**contains the weather image, location and date */}
           <div className="md:col-span-2">
             <div className="w-full grid mt-12">
-        <img
+              {dataLoading && locationLoading ? <div className="w-full col-start-1 col-end-2 row-start-1 row-end-2 rounded-full ">
+                <Skeleton className='h-40 w-80 bg-Neutral-700'/>
+              </div> : <><img
           src="./images/bg-today-small.svg"
           alt="backgroud image"
           className="w-full col-start-1 col-end-2 row-start-1 row-end-2 md:hidden"
@@ -189,7 +192,8 @@ function App() {
                 : isImperial ? Math.round((weatherData?.current?.temperature_2m*9/5)+32) + "°" : Math.round(weatherData?.current?.temperature_2m) + "°" }
             </div>
           </div>
-        </div>
+        </div></>}
+        
       </div>
 
       <div className="grid grid-cols-2 gap-5 w-full mt-8
