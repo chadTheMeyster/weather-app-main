@@ -7,7 +7,7 @@ export function useFetchLocation(longitude, latitude) {
   const [locationLoading, setLocationLoading] = useState(false);
   const [error, setError] = useState();
 
-  const apiKey = import.meta.env.REVERSE_GEOLOCATION_API;
+  const apiKey = import.meta.env.REVERSE_GEOLOCATION;
 
   useEffect(() => {
     async function fetchLocationData() {
